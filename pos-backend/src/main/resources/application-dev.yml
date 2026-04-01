@@ -1,0 +1,17 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+
+  flyway:
+    clean-disabled: false
+
+springdoc:
+  swagger-ui:
+    enabled: true
+
+logging:
+  level:
+    com.importacionesnunez: DEBUG
+    org.hibernate.SQL: DEBUG

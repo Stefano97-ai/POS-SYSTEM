@@ -1,0 +1,35 @@
+services:
+  pos-postgres:
+    image: postgres:16-alpine
+    container_name: pos-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: pos_db
+      POSTGRES_USER: pos_user
+      POSTGRES_PASSWORD: pos_secret
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pos-backend:
+    build: .
+    container_name: pos-backend
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://pos-postgres:5432/pos_db
+      - SPRING_DATASOURCE_USERNAME=pos_user
+      - SPRING_DATASOURCE_PASSWORD=pos_secret
+      - JWT_SECRET=K7d9F2mP4xR8wQ3nL6vB1jT5yH0cA9sE3gU7iO2pZ4
+      - SPRING_MAIL_HOST=smtp.gmail.com
+      - SPRING_MAIL_PORT=587
+      - SPRING_MAIL_USERNAME=jesucito2443@hotmail.com
+      - SPRING_MAIL_PASSWORD=changeme
+    depends_on:
+      - pos-postgres
+
+volumes:
+  postgres_data:
