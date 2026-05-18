@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sin conexión — Importaciones Nuñez</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f0f1a;
+      color: #eaeaf0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 2rem;
+    }
+    .container { max-width: 400px; }
+    .icon { font-size: 4rem; margin-bottom: 1rem; }
+    h1 { font-size: 1.5rem; margin-bottom: 0.75rem; color: #fff; }
+    p { color: #888; margin-bottom: 1.5rem; line-height: 1.6; }
+    button {
+      background: #2d6a4f;
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover { background: #40916c; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">📡</div>
+    <h1>Sin conexión a internet</h1>
+    <p>
+      No se puede conectar al servidor. Verifica tu conexión a internet
+      e intenta nuevamente.
+    </p>
+    <p style="font-size:0.85rem; color:#555;">
+      Las ventas realizadas offline se sincronizarán automáticamente cuando vuelva la conexión.
+    </p>
+    <button onclick="window.location.reload()">🔄 Reintentar</button>
+  </div>
+</body>
+</html>
