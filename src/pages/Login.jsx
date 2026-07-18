@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { api } from '../utils/api';
+import { api } from '../services/api';
 import { Lock, User, AlertCircle } from 'lucide-react';
 
-function Login() {
+function Login({ onLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -18,20 +18,20 @@ function Login() {
 
     try {
       const response = await api.login({ username, password });
-      
-      // Save token and user info
-      localStorage.setItem('pos_token', response.accessToken);
+      const accessToken = response?.accessToken;
+      if (!accessToken) throw new Error('Respuesta del servidor inválida');
+
+      localStorage.setItem('pos_token', accessToken);
       localStorage.setItem('pos_user', JSON.stringify({
         username: response.username,
         nombreCompleto: response.nombreCompleto,
         role: response.role
       }));
 
-      // Redirect to dashboard
-      window.location.href = '/';
+      onLogin(accessToken);
+      navigate('/');
     } catch (err) {
       console.error('Login error:', err);
-      console.error('Response:', err.response?.data);
       setError(err.response?.data?.message || err.message || 'Credenciales inválidas o servidor inalcanzable.');
     } finally {
       setLoading(false);
@@ -59,28 +59,28 @@ function Login() {
 
         <form onSubmit={handleLogin} className="login-form">
           <div className="input-group">
-            <label>Correo electronico</label>
+            <label>Usuario</label>
             <div className="input-wrapper">
               <User size={18} className="input-icon" />
               <input
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="Ej. admin"
+                placeholder="Usuario"
                 required
               />
             </div>
           </div>
 
           <div className="input-group">
-            <label>Contrasena</label>
+            <label>Contraseña</label>
             <div className="input-wrapper">
               <Lock size={18} className="input-icon" />
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Ej. admin123"
+                placeholder="Contraseña"
                 required
               />
             </div>
@@ -91,10 +91,6 @@ function Login() {
           </button>
         </form>
 
-        <div className="login-footer-hint">
-          <p>Demo: admin</p>
-          <p>Contrasena: admin123</p>
-        </div>
       </div>
     </div>
   );

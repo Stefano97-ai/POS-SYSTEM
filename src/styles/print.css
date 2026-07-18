@@ -1,0 +1,21 @@
+/* ===== PRINT SYTLE: SIMPLIFIED FOR REACT-TO-PRINT ===== */
+
+@media print {
+  @page {
+    margin: 1cm;
+    size: auto;
+  }
+
+  /* Ocultamos solo elementos que nunca deberián imprimirse, como botones */
+  .no-print, .btn, .modal-close {
+    display: none !important;
+  }
+
+  /* Aseguramos que los fondos negros (como la fila de totales) se impriman */
+  .v3-total-row {
+    background-color: #000 !important;
+    color: #fff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}

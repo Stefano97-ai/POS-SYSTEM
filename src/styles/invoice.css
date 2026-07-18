@@ -1,0 +1,230 @@
+/* ===== PROFESSIONAL INVOICE LAYOUT (A4 STYLE) - REFACTORED ===== */
+
+.professional-layout {
+  background: white;
+  color: #1a1a1a;
+  padding: 40px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.4;
+  box-sizing: border-box;
+}
+
+.invoice-header-modern {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  margin-bottom: 30px;
+  gap: 20px;
+}
+
+.header-left {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+}
+
+.business-logo-placeholder {
+  width: 80px;
+  height: 80px;
+  background: #f0fdf4;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dcfce7;
+  flex-shrink: 0;
+}
+
+.business-main-info {
+  flex: 1;
+}
+
+.business-main-info h1 {
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin: 0 0 4px 0;
+  color: #000;
+  text-transform: uppercase;
+}
+
+.business-sub {
+  font-weight: 700;
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+
+.business-main-info p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  min-width: 250px;
+}
+
+.invoice-id-box {
+  border: 2px solid #000;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.id-ruc { font-weight: 800; font-size: 1.1rem; margin: 0; }
+.id-type { 
+  background: #000; 
+  color: white; 
+  padding: 5px; 
+  font-weight: 800; 
+  font-size: 1rem;
+  margin: 8px 0;
+  text-transform: uppercase;
+}
+.id-num { font-weight: 900; font-size: 1.4rem; color: #d32f2f; margin: 0; }
+
+/* Customer Info Grid */
+.customer-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #ddd;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 30px;
+  gap: 1px;
+}
+
+.info-item {
+  background: white;
+  padding: 12px 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-item label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.info-item span {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #000;
+}
+
+/* Modern Table */
+.invoice-table-container {
+  margin-bottom: 30px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.modern-table th {
+  background: #f8f9fa;
+  color: #000;
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 12px 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.modern-table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+}
+
+.table-product-name {
+  font-weight: 700;
+  color: #000;
+}
+
+/* Summary Section */
+.invoice-summary {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.summary-left { flex: 1; }
+.summary-right { width: 300px; flex-shrink: 0; }
+
+.amount-words {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border-left: 5px solid #000;
+}
+
+.amount-words label { font-size: 0.75rem; font-weight: 800; color: #777; display: block; margin-bottom: 4px; }
+.amount-words p { margin: 0; font-size: 0.95rem; font-weight: 700; color: #000; }
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 5px;
+  border-bottom: 1px solid #eee;
+}
+
+.total-row span:first-child { font-weight: 700; color: #666; font-size: 0.9rem; }
+.total-row span:last-child { font-weight: 800; color: #000; font-size: 1rem; }
+
+.total-grand {
+  background: #000;
+  color: white !important;
+  padding: 15px;
+  border-radius: 6px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total-grand span:first-child { font-weight: 800; font-size: 1rem; }
+.total-grand span:last-child { font-weight: 900; font-size: 1.3rem; }
+
+.print-footer-info {
+  margin-top: 40px;
+  text-align: center;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+
+.print-footer-info p {
+  margin: 3px 0;
+  font-size: 0.8rem;
+  color: #777;
+}
+
+/* Hide print button on print */
+@media print {
+  .no-print { display: none !important; }
+  body { background: white !important; padding: 0 !important; }
+  .professional-layout { 
+    box-shadow: none; 
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+}

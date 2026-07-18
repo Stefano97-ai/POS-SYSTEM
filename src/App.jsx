@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
 import MainLayout from './layouts/MainLayout';
@@ -11,14 +12,15 @@ import Customers from './pages/Customers';
 import Suppliers from './pages/Suppliers';
 import Reports from './pages/Reports';
 import Settings from './pages/Settings';
+import OfflineBanner from './components/OfflineBanner';
 
 function App() {
-  const token = localStorage.getItem('pos_token');
+  const [token, setToken] = useState(() => localStorage.getItem('pos_token'));
 
   if (!token) {
     return (
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login onLogin={setToken} />} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     );
@@ -26,8 +28,9 @@ function App() {
 
   return (
     <AppProvider>
+      <OfflineBanner />
       <Routes>
-        <Route element={<MainLayout />}>
+        <Route element={<MainLayout onLogout={() => setToken(null)} />}>
           <Route path="/" element={<Dashboard />} />
           <Route path="/pos" element={<POS />} />
           <Route path="/products" element={<Products />} />
@@ -45,3 +48,4 @@ function App() {
 }
 
 export default App;
+

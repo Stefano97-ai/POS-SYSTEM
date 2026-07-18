@@ -12,7 +12,7 @@ export const defaultSettings = {
   taxRate: 18,
   currency: 'S/.',
   moneda: 'PEN',
-  logo: null,
+  logoUrl: '/assets/logo_limpio_nunez.png?v=2',
 };
 
 export const defaultCategories = [

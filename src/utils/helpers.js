@@ -96,3 +96,57 @@ export const getTipoComprobanteLabel = (tipo) => {
   };
   return labels[tipo] || tipo;
 };
+
+// Normaliza los campos del backend a nombres consistentes usados en el frontend
+export const normalizeProduct = (p) => ({
+  ...p,
+  name: p.nombre || p.name || '',
+  price: Number(p.precioVenta ?? p.price ?? 0),
+  costPrice: Number(p.precioCompra ?? p.costPrice ?? 0),
+  barcode: p.codigoBarras || p.barcode || p.codigo || '',
+  category: p.categoriaNombre || p.category || p.categoria || '',
+});
+
+export const getStockLevel = (product) => {
+  const stock = product.stock || 0;
+  const min = product.stockMinimo || 5;
+  if (stock === 0) return 'critical';
+  if (stock <= min) return 'low';
+  if (stock <= min * 2) return 'medium';
+  return 'good';
+};
+
+export function numeroALetras(num) {
+  const unidades = ['', 'UN', 'DOS', 'TRES', 'CUATRO', 'CINCO', 'SEIS', 'SIETE', 'OCHO', 'NUEVE'];
+  const decenas = ['DIEZ', 'VEINTE', 'TREINTA', 'CUARENTA', 'CINCUENTA', 'SESENTA', 'SETENTA', 'OCHENTA', 'NOVENTA'];
+  const especiales = ['ONCE', 'DOCE', 'TRECE', 'CATORCE', 'QUINCE', 'DIECISEIS', 'DIECISIETE', 'DIECIOCHO', 'DIECINUEVE'];
+  const centenas = ['CIENTO', 'DOSCIENTOS', 'TRESCIENTOS', 'CUATROCIENTOS', 'QUINIENTOS', 'SEISCIENTOS', 'SETETIENTOS', 'OCHOCIENTOS', 'NOVECIENTOS'];
+
+  function convertir(n) {
+    if (n === 0) return 'CERO';
+    if (n === 100) return 'CIEN';
+    if (n < 10) return unidades[n];
+    if (n < 20) return n === 10 ? decenas[0] : especiales[n - 11];
+    if (n < 100) {
+      const u = n % 10;
+      return decenas[Math.floor(n / 10) - 1] + (u > 0 ? ' Y ' + unidades[u] : '');
+    }
+    if (n < 1000) {
+      const d = n % 100;
+      return centenas[Math.floor(n / 100) - 1] + (d > 0 ? ' ' + convertir(d) : '');
+    }
+    if (n < 1000000) {
+      const m = Math.floor(n / 1000);
+      const r = n % 1000;
+      let s = (m === 1 ? 'MIL' : convertir(m) + ' MIL');
+      if (r > 0) s += ' ' + convertir(r);
+      return s;
+    }
+    return '';
+  }
+
+  const entero = Math.floor(num);
+  const decimales = Math.round((num - entero) * 100);
+  return `${convertir(entero)} CON ${String(decimales).padStart(2, '0')}/100 SOLES`.toUpperCase();
+}
+

@@ -10,6 +10,7 @@ import {
   LogOut,
   Warehouse,
   Truck,
+  X,
 } from 'lucide-react';
 
 const navItems = [
@@ -24,9 +25,28 @@ const navItems = [
   { path: '/settings', label: 'Configuración', icon: Settings },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ onLogout, isOpen, onClose }) {
+  const user = (() => {
+    try {
+      return JSON.parse(localStorage.getItem('pos_user')) || {};
+    } catch {
+      return {};
+    }
+  })();
+
+  const handleLogout = () => {
+    localStorage.removeItem('pos_token');
+    localStorage.removeItem('pos_user');
+    onLogout?.();
+  };
+
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${isOpen ? 'sidebar-mobile-open' : ''}`}>
+      {/* Botón cerrar en móvil */}
+      <button className="sidebar-close-btn" onClick={onClose} aria-label="Cerrar menú">
+        <X size={20} />
+      </button>
+
       <div className="sidebar-header">
         <div className="sidebar-logo">
           <div className="sidebar-logo-icon">POS</div>
@@ -41,6 +61,7 @@ export default function Sidebar() {
             to={item.path}
             className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
             end={item.path === '/'}
+            onClick={onClose}
           >
             <item.icon size={20} />
             <span>{item.label}</span>
@@ -52,20 +73,16 @@ export default function Sidebar() {
       <div className="sidebar-footer">
         <div className="sidebar-user">
           <div className="sidebar-avatar">
-            {localStorage.getItem('pos_user') ? JSON.parse(localStorage.getItem('pos_user')).username.charAt(0).toUpperCase() : 'A'}
+            {(user.username || 'A').charAt(0).toUpperCase()}
           </div>
           <div className="sidebar-user-info">
             <span className="sidebar-user-name">
-              {localStorage.getItem('pos_user') ? JSON.parse(localStorage.getItem('pos_user')).username : 'Usuario'}
+              {user.username || 'Usuario'}
             </span>
             <span className="sidebar-user-role">Administrador</span>
           </div>
           <button
-            onClick={() => {
-              localStorage.removeItem('pos_token');
-              localStorage.removeItem('pos_user');
-              window.location.href = '/login';
-            }}
+            onClick={handleLogout}
             title="Cerrar sesión"
             style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--color-text-muted)', marginLeft: 'auto', padding: '5px' }}
           >

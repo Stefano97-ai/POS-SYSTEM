@@ -1,0 +1,60 @@
+@theme {
+  --color-primary: #047857; /* Emerald 600 - más vibrante */
+  --color-primary-dark: #064E3B; /* Emerald 900 */
+  --color-primary-light: #34D399; /* Emerald 400 */
+  --color-accent: #10B981; /* Emerald 500 */
+  
+  --color-bg-dark: #F3F6F8; /* Un gris muy sutil con tono azulado */
+  --color-bg-card: #FFFFFF;
+  --color-bg-card2: #F9FAFB;
+  
+  --color-text-main: #0F172A; /* Slate 900 */
+  --color-text-sec: #475569; /* Slate 600 */
+  --color-text-muted: #94A3B8; /* Slate 400 */
+  
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+  --color-info: #3B82F6;
+  
+  --color-border: #E2E8F0; /* Slate 200 */
+  
+  /* Sombras Premium */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+  --shadow-glow: 0 0 15px rgba(16, 185, 129, 0.3);
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', system-ui, sans-serif;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg-dark); }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+
+input, select, textarea {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-main);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: all 0.2s;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(27, 94, 55, 0.1);
+}

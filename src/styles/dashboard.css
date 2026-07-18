@@ -1,0 +1,305 @@
+/* Premium Dashboard Styles */
+
+.dashboard-premium {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2.5rem;
+}
+
+.dashboard-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin: 0 0 0.25rem 0;
+  letter-spacing: -0.5px;
+}
+
+.dashboard-subtitle {
+  color: var(--color-text-sec);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.btn-export {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-export:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+}
+
+.btn-export:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* KPI Cards Grid */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.kpi-card {
+  background: var(--color-bg-card);
+  padding: 1.75rem;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.kpi-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Decorative blur circle in background of cards */
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 100px;
+  height: 100px;
+  background: var(--color-primary-light);
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.15;
+  z-index: 0;
+}
+
+.kpi-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-text-sec);
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.kpi-icon-wrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 0.75rem;
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kpi-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.kpi-value {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  position: relative;
+  z-index: 1;
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: -0.5px;
+}
+
+.kpi-subtext {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-top: 0.5rem;
+  display: block;
+}
+
+/* Lower Grid Panels */
+.dashboard-panels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.panel-card {
+  background: var(--color-bg-card);
+  padding: 1.75rem;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-card);
+  height: 100%;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.panel-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+/* Stock Alerts */
+.stock-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.stock-list::-webkit-scrollbar { width: 4px; }
+.stock-list::-webkit-scrollbar-track { background: transparent; }
+.stock-list::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+
+.stock-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  background: var(--color-bg-card2);
+  transition: transform 0.2s;
+}
+
+.stock-item:hover {
+  transform: scale(1.01);
+}
+
+.stock-item.danger {
+  background: linear-gradient(to right, rgba(239, 68, 68, 0.05), rgba(239, 68, 68, 0.1));
+  border-left: 4px solid var(--color-danger);
+}
+
+.stock-item.warning {
+  background: linear-gradient(to right, rgba(245, 158, 11, 0.05), rgba(245, 158, 11, 0.1));
+  border-left: 4px solid var(--color-warning);
+}
+
+.stock-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.stock-badge {
+  padding: 0.35rem 0.75rem;
+  border-radius: 2rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.stock-badge.danger {
+  background: rgba(239, 68, 68, 0.15);
+  color: #B91C1C;
+}
+
+.stock-badge.warning {
+  background: rgba(245, 158, 11, 0.15);
+  color: #B45309;
+}
+
+/* Top Products */
+.product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.product-list::-webkit-scrollbar { width: 4px; }
+.product-list::-webkit-scrollbar-track { background: transparent; }
+.product-list::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+
+.product-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.product-rank {
+  width: 32px;
+  height: 32px;
+  border-radius: 0.5rem;
+  background: rgba(4, 120, 87, 0.1);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.product-item:nth-child(1) .product-rank {
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  color: white;
+}
+
+.product-item:nth-child(2) .product-rank {
+  background: linear-gradient(135deg, #94A3B8, #64748B);
+  color: white;
+}
+
+.product-item:nth-child(3) .product-rank {
+  background: linear-gradient(135deg, #D97706, #92400E);
+  color: white;
+}
+
+.product-name {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.product-qty {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.product-qty span {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
